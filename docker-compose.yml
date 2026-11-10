@@ -7,7 +7,7 @@ services:
       args:
         VITE_BACKEND_URL: http://localhost:3000
 
-    container_name: music-app-frontend
+    container_name: tonalix-app-frontend
 
     ports:
       - "5173:80"
@@ -16,14 +16,14 @@ services:
       - backend
 
     networks:
-      - music-app
+      - tonalix-app
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
 
-    container_name: music-app-backend
+    container_name: tonalix-app-backend
 
     ports:
       - "3000:3000"
@@ -38,7 +38,7 @@ services:
       - audio-engine
 
     networks:
-      - music-app
+      - tonalix-app
 
     volumes:
       - backend-uploads:/app/uploads
@@ -48,17 +48,17 @@ services:
       context: ./audio-engine
       dockerfile: Dockerfile
 
-    container_name: music-app-audio-engine
+    container_name: tonalix-app-audio-engine
 
     networks:
-      - music-app
+      - tonalix-app
 
     volumes:
       - processed-audio:/app/processed
       - temp-audio:/app/temp
 
 networks:
-  music-app:
+  tonalix-app:
     driver: bridge
 
 volumes:
